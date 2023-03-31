@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export const Header = () => {
 
@@ -138,7 +139,7 @@ export const Header = () => {
                             </ul>
                             <div>
                                 <div onClick={() => categoriesMenuHandler()} className="flex justify-between items-center">
-                                    <h2 className="py-4">Categories</h2> <span> {categoriesMenu ? <motion.div animate={{rotate: 0}}> <ChevronDownIcon width={20} /> </motion.div> : <motion.div animate={{rotate: -90}}> <ChevronDownIcon width={20} /> </motion.div>} </span>
+                                    <h2 className="py-4">Categories</h2> <span> {data ? (categoriesMenu ? <motion.div animate={{rotate: 0}}> <ChevronDownIcon width={20} /> </motion.div> : <motion.div animate={{rotate: -90}}> <ChevronDownIcon width={20} /> </motion.div>) : <div> <LoadingSpinner /> </div>} </span>
                                 </div>
                                 <AnimatePresence>
                                     {categoriesMenu && (

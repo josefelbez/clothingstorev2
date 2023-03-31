@@ -9,6 +9,9 @@ import { useEffect, useState } from "react"
 
 import { AnimatePresence, motion } from 'framer-motion'
 
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 export const Header = () => {
 
     const router = useRouter();
@@ -80,13 +83,16 @@ export const Header = () => {
                             
                             {shopMenu && (
                                 <motion.div  onClick={() => closeSearchBar()} initial={{opacity:0}} animate={{opacity: 1}} exit={{opacity: 0}} onMouseOver={openShopMenu} onMouseOut={closeShopMenu} className="absolute top-8 w-[fit] pt-2 left-[calc(100%_-_33px)] text-white z-50">
-                                    <div className="bg-white text-black w-full border border-t-black">
+                                    <div className="bg-white text-black w-full min-w-[200px] border border-t-black">
                                         <motion.ul className="children:children-li:p-4 hover:children:children-li:bg-black hover:children:children-li:text-white">
                                             <motion.li initial={{opacity: 0, y: -20}} animate={{opacity: 1, y: 0}} exit={{opacity: 0}} key="browseAllCategory"> <Link href="/shop" className="flex justify-between gap-10 items-center"> <span>Browse All</span> <ArrowLongRightIcon width={20} /> </Link> </motion.li>
                                             
-                                            {data?.map((category) => (
+                                            {data ? data?.map((category) => (
                                                 <motion.li initial={{opacity: 0, y: -20}} animate={{opacity: 1, y: 0}} exit={{opacity: 0}} key={category.id}> <Link href={`/shop/category/${category.id}`} className="flex justify-between gap-10 items-center"> <span>{category.title}</span> <ArrowLongRightIcon width={20} /> </Link> </motion.li>
-                                            ))}
+                                            ))
+                                            :
+                                                <div className="p-4"> <Skeleton /> </div>
+                                            }
                                         </motion.ul>
                                     </div>
                                 </motion.div>

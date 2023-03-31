@@ -48,6 +48,10 @@ export const Header = () => {
         setCategoriesMenu(prev => !prev)
     }
 
+    const closeCategoryMenu = () => {
+        setCategoriesMenu(false)
+    }
+
     useEffect(() => (
         setCategoriesMenu(false)
     ), [])
@@ -78,7 +82,7 @@ export const Header = () => {
                     <div>
                         <ul className="relative flex gap-10 children:hidden first:children:flex first:children:sm:hidden children:sm:flex font-light first:hover:children-li:border-black first:children-li:border-0 children-li:py-1 first:children-li:py-0 children-li:border-b children-li:border-b-transparent">
                             <li className="cursor-pointer" onClick={() => [mobileMenuHandler(), closeSearchBar()]}> <Bars3BottomLeftIcon width={20} className="stroke-1"/> </li>
-                            <li className={`${pathname === '/' ? 'font-normal' : 'font-light'}`}> <Link href="/"> Home </Link> </li>
+                            <li onClick={() => closeSearchBar()} className={`${pathname === '/' ? 'font-normal' : 'font-light'}`}> <Link href="/"> Home </Link> </li>
                             <li onMouseOver={openShopMenu} onMouseOut={closeShopMenu} className={pathname === '/shop' || pathname.match(`/shop/category/`) ? 'font-normal' : 'font-light'}> Shop </li>
                         
                             
@@ -105,7 +109,7 @@ export const Header = () => {
                     </div>
                     <div>
                         <ul className="flex gap-5 children:cursor-pointer">
-                        <li onClick={() => searchBarHandler()}> <MagnifyingGlassIcon width={20} className="stroke-1"/> </li>
+                            <li onClick={() => searchBarHandler()}> <MagnifyingGlassIcon width={20} className="stroke-1"/> </li>
                             <li onClick={() => closeSearchBar()}> <Link href="/"> <HeartIcon width={20} className="stroke-1"/> </Link> </li>
                             <li onClick={() => closeSearchBar()}> <Link href="/"> <ShoppingBagIcon width={20} className="stroke-1"/> </Link> </li>
                         </ul>
@@ -116,9 +120,9 @@ export const Header = () => {
             <AnimatePresence>
             {searchBar && (
                 <>
-                    <motion.div key="searchBox" initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -20}} className="absolute cursor-pointer  flex justify-between items-center w-fit border mx-auto inset-x-0 rounded-full my-5 z-20">
-                        <input type="text" className="py-2 pl-4 pr-2 outline-none bg-transparent z-50" placeholder="Search"/>
-                        <MagnifyingGlassIcon className="stroke-1 mx-2" width={20}/>
+                    <motion.div key="searchBox" initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -20}} className="hover:border-black focus-within:border-black absolute cursor-pointer  flex justify-between items-center w-fit border mx-auto inset-x-0 rounded-full my-5 z-20">
+                        <input type="text" className="py-2 pl-4 pr-2 outline-none bg-transparent z-50 peer" placeholder="Search"/>
+                        <MagnifyingGlassIcon className="stroke-1 stroke-gray-300 mx-2 peer-focus-within:stroke-black peer-hover:stroke-black ease-linear duration-100" width={20}/>
                     </motion.div>
                     <span key="searchOverlay" onClick={() => searchBarHandler()} className={`w-full h-[calc(100%_-_68px)] absolute inset-x-0`}></span>
                 </>
@@ -134,8 +138,8 @@ export const Header = () => {
                         </div>
                         <div className="p-4 pt-0">
                             <ul className="children:children:py-4 children:children:flex children:children:items-center children:children:justify-between">
-                                <li> <Link href="/"> <span>Home</span> <ArrowLongRightIcon width={20} /> </Link> </li>
-                                <li> <Link href="/"> <span>Shop</span> <ArrowLongRightIcon width={20} /> </Link> </li>
+                                <li onClick={() => [mobileMenuHandler(), closeCategoryMenu()]}> <Link href="/"> <span>Home</span> <ArrowLongRightIcon width={20} /> </Link> </li>
+                                <li onClick={() => [mobileMenuHandler(), closeCategoryMenu()]}> <Link href="/shop"> <span>Shop</span> <ArrowLongRightIcon width={20} /> </Link> </li>
                             </ul>
                             <div>
                                 <div onClick={() => categoriesMenuHandler()} className="flex justify-between items-center">
@@ -145,7 +149,7 @@ export const Header = () => {
                                     {categoriesMenu && (
                                         <motion.ul className="children:children:py-4 children:font-light">
                                             {data?.map((category) => (
-                                                <motion.li initial={{opacity: 0, y: -50}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -10}} key={category.id}> <Link href="" className="flex justify-between items-center"> <span>{category.title}</span> <ArrowLongRightIcon width={20} /> </Link> </motion.li>
+                                                <motion.li onClick={() => [mobileMenuHandler(), categoriesMenuHandler()]} initial={{opacity: 0, y: -50}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -10}} key={category.id}> <Link href={`/shop/category/${category.id}`} className="flex justify-between items-center"> <span>{category.title}</span> <ArrowLongRightIcon width={20} /> </Link> </motion.li>
                                             ))}
                                         </motion.ul>
                                     )}

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import {motion} from "framer-motion"
-import { RouterOutputs } from '@/utils/api';
+import type { RouterOutputs } from '@/utils/api';
 import Link from 'next/link';
 import { HeartIcon, ShoppingBagIcon } from '@heroicons/react/24/outline';
 

@@ -1,29 +1,13 @@
 import type { GetStaticProps, NextPage } from 'next/types'
 
 import {api} from "@/utils/api";
-import { Suspense } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import { ProductCard } from '@/components/ProductCard';
 
 const ProductPage: NextPage< {id: string} > = ( {id} ) => {
 
     const { data } = api.product.getProductById.useQuery( {id} );
 
     return (
-      <section className="px-5 mt-10 ">
-
-      <Suspense fallback={<p>Loading...</p>}>
-        <AnimatePresence>
-            <div className='md:max-w-lg mx-auto'>
-                {data && (
-                  
-                  <ProductCard hasUtilities={true} className="flex flex-col md:flex-row items-center gap-10 children:space-y-5 justify-center children:text-center children:items-center" 
-                    key={data.id} data={data} />
-                )}
-            </div>
-        </AnimatePresence>
-      </Suspense>
-    </section>
+      <h1>{id}</h1>
     )
 }
 

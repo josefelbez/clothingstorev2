@@ -1,11 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 
-import { Slideshow } from "@/components/Slideshow";
-import { Suspense } from "react";
-
-import { AnimatePresence } from 'framer-motion';
-
 const Home: NextPage = () => {
 
   return (
@@ -17,15 +12,6 @@ const Home: NextPage = () => {
       </Head>
       
       <main>
-        <section className="px-5 my-5 space-y-5">
-          <h2 className="font-bold uppercase border-b-2 border-black w-fit">Best Sellers</h2> 
-
-          <Suspense fallback={<p>Loading...</p>}>
-            <AnimatePresence>
-              <Slideshow />
-            </AnimatePresence>
-          </Suspense>
-        </section>
 
 
       </main>

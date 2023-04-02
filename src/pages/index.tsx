@@ -23,21 +23,21 @@ const Home: NextPage = () => {
       <main className="grow">
         <section className="p-4 space-y-5">
           <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Best Sellers</h2>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<div className="p-4 flex w-full items-center justify-center my-auto h-auto"> <LoadingSpinner size={64}/> </div>}>
             <Slideshow isBestSellers data={data}/>
           </Suspense>
         </section>
 
         <section className="p-4 space-y-5">
           <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Last Added</h2>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<div className="p-4 flex w-full items-center justify-center my-auto h-auto"> <LoadingSpinner size={64}/> </div>}>
             <Slideshow isNewestProducts data={data}/>
           </Suspense>
         </section>
 
         <section className="p-4 space-y-5">
           <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Best Deals</h2>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<div className="p-4 flex w-full items-center justify-center my-auto h-auto"> <LoadingSpinner size={64}/> </div>}>
             <Slideshow isBestDeals data={data}/>
           </Suspense>
         </section>

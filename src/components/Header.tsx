@@ -13,6 +13,9 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { LoadingSpinner } from "./LoadingSpinner"
 
+import { useCart } from "react-use-cart";
+import { useWishlist} from 'react-use-wishlist';
+
 export const Header = () => {
 
     const router = useRouter();
@@ -74,6 +77,23 @@ export const Header = () => {
         setSearchBar(false)
     }
 
+    const { isEmpty, totalItems } = useCart();
+
+    const [ cartItems, setCartItems ] = useState(0);
+
+    useEffect(() => (
+        setCartItems(totalItems)
+    ), [totalItems]);
+
+    
+    const { isWishlistEmpty, totalWishlistItems } = useWishlist();
+
+    const [ wishlistItems, setwishlistItems ] = useState(0);
+
+    useEffect(() => (
+        setwishlistItems(totalWishlistItems)
+    ), [totalWishlistItems]);
+
     return (
         
        <header>
@@ -110,8 +130,8 @@ export const Header = () => {
                     <div>
                         <ul className="flex gap-5 children:cursor-pointer">
                             <li onClick={() => searchBarHandler()}> <MagnifyingGlassIcon width={20} className="stroke-1"/> </li>
-                            <li onClick={() => closeSearchBar()}> <Link href="/"> <HeartIcon width={20} className="stroke-1"/> </Link> </li>
-                            <li onClick={() => closeSearchBar()}> <Link href="/"> <ShoppingBagIcon width={20} className="stroke-1"/> </Link> </li>
+                            <li onClick={() => closeSearchBar()}> <Link href="/" className="relative"> <HeartIcon width={20} className="stroke-1"/> {wishlistItems > 0 && <span className="absolute bottom-3 text-xs left-2 right-0 bg-black w-5 flex items-center justify-center aspect-square text-white rounded-full">{wishlistItems}</span>} </Link> </li>
+                            <li onClick={() => closeSearchBar()}> <Link href="/" className="relative"> <ShoppingBagIcon width={20} className="stroke-1"/> {cartItems > 0 && <span className="absolute bottom-3 text-xs left-2 right-0 bg-black w-5 flex items-center justify-center aspect-square text-white rounded-full">{cartItems}</span>} </Link> </li>
                         </ul>
                     </div>
                 </nav>

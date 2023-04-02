@@ -25,6 +25,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-time-ago": "^7.2.1",
+    "react-use-cart": "^1.13.0",
+    "react-use-wishlist": "^1.0.1",
     "superjson": "1.12.2",
     "zod": "^3.21.4"
   },

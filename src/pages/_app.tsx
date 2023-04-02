@@ -5,15 +5,21 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { CartProvider } from "react-use-cart";
+import { WishlistProvider } from "react-use-wishlist";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
-      <div className="flex flex-col h-screen">
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
-      </div>
+    <CartProvider>
+      <WishlistProvider>
+        <div className="flex flex-col h-screen">
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
+      </WishlistProvider>
+    </CartProvider>
     </>
   ) 
     

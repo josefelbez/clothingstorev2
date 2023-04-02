@@ -15,7 +15,7 @@ export const appRouter = createTRPCRouter({
   products: productsRouter,
   categories: categoriesRouter,
   productsByCategory: productsByCategory,
-  category: categoryRouter,
+  category: categoryRouter
 });
 
 // export type definition of API

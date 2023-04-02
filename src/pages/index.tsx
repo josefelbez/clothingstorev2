@@ -1,7 +1,16 @@
+import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { Slideshow } from "@/components/Slideshow";
+import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import Head from "next/head";
+import { Suspense } from "react";
 
 const Home: NextPage = () => {
+
+
+  const { data } = api.products.getAll.useQuery();
+
+  if(!data) return <div className="p-4 flex w-full items-center justify-center h-[calc(100vh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
 
   return (
     <>
@@ -11,8 +20,27 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main>
+      <main >
+        <section className="p-4 space-y-5">
+          <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Best Sellers</h2>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Slideshow isBestSellers data={data}/>
+          </Suspense>
+        </section>
 
+        <section className="p-4 space-y-5">
+          <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Last Added</h2>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Slideshow isNewestProducts data={data}/>
+          </Suspense>
+        </section>
+
+        <section className="p-4 space-y-5">
+          <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Best Deals</h2>
+          <Suspense fallback={<p>Loading...</p>}>
+            <Slideshow isBestDeals data={data}/>
+          </Suspense>
+        </section>
 
       </main>
     </>

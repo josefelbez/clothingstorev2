@@ -6,8 +6,14 @@ const ProductPage: NextPage< {id: string} > = ( {id} ) => {
 
     const { data } = api.product.getProductById.useQuery( {id} );
 
+    if(!data) return <div className="p-4 flex w-full items-center justify-center h-[calc(100vh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
+
     return (
-      <h1>{id}</h1>
+      <section className='mt-10'>
+        <Suspense fallback={<p>Loading...</p>}>
+          <ProductCard data={data} hasUtilities/>
+        </Suspense>
+      </section>
     )
 }
 
@@ -15,6 +21,9 @@ import { createProxySSGHelpers } from '@trpc/react-query/ssg'
 import { appRouter } from '@/server/api/root';
 import { prisma } from '@/server/db';
 import superjson from "superjson";
+import { ProductCard } from '@/components/ProductCard';
+import { Suspense } from 'react';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   

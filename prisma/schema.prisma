@@ -26,37 +26,51 @@ model Sizes {
     createdAt   DateTime @default(now())
     title       String @db.VarChar(255)
 
-    products Product[]
+    products    Product[]
 
     @@map("sizes")
 }
 
 model Sales {
     id          Int @id @default(autoincrement())
-    saleDate    DateTime @default(now())
-
-    products    Product[]
+    saleDate    DateTime @default(now())    
     totalPrice  Float
+
+    saleItems SaleProduct[]
+
+    @@map("sales")
+}
+
+model SaleProduct {
+    id          Int         @id @default(autoincrement())
+    saleId      Int
+    sale        Sales       @relation(fields: [saleId], references: [id])
+    productId   Int
+    product     Product     @relation(fields: [productId], references: [id])
+    quantity    Int
+    price       Float
+
+    @@index([saleId])
+    @@index([productId])
 }
 
 model Product {
     id          Int    @id @default(autoincrement())    
     categoryId  Int
-    sizeId      Int?
-    salesId     Int? 
+    sizeId      Int
+    sales       SaleProduct[] 
 
-    createdAt   DateTime @default(now())
+    createdAt   DateTime @default(now())    
+    discountPercentage Int
     title       String @db.VarChar(255)
     price       Float
     image       String @db.VarChar(255)
     description String @db.VarChar(255)
 
-    size        Sizes? @relation(fields: [sizeId], references: [id])    
-    category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-    sales       Sales? @relation(fields: [salesId], references: [id])   
+    size        Sizes @relation(fields: [sizeId], references: [id])    
+    category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade) 
 
     @@map("products")
     @@index([categoryId])
     @@index([sizeId])
-    @@index([salesId])
 }

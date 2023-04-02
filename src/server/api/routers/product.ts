@@ -15,7 +15,9 @@ export const productRouter = createTRPCRouter({
               id: parseInt(input.id)
             },
             include: {
-                category: true
+                category: true,
+                size: true,
+                sales: true,
             }
         });
 

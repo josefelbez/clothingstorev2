@@ -4,7 +4,7 @@ import {api} from "@/utils/api";
 
 const CategoryPage: NextPage< {id: string} > = ( {id} ) => {
 
-    const { data, isFetched } = api.productsByCategory.getProductByCategory.useQuery( {id} );
+    const { data } = api.productsByCategory.getProductByCategory.useQuery( {id} );
 
     const { data: category } = api.category.getCategoryById.useQuery ( {id} );
 

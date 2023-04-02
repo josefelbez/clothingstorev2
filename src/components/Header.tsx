@@ -120,9 +120,9 @@ export const Header = () => {
             <AnimatePresence>
             {searchBar && (
                 <>
-                    <motion.div key="searchBox" initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -20}} className="hover:border-black focus-within:border-black absolute cursor-pointer  flex justify-between items-center w-fit border mx-auto inset-x-0 rounded-full my-5 z-20">
+                    <motion.div key="searchBox" initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -20}} className="bg-white hover:border-zinc-900 focus-within:border-zinc-900 absolute cursor-pointer  flex justify-between items-center w-fit border mx-auto inset-x-0 rounded-full my-5 z-20">
                         <input type="text" className="py-2 pl-4 pr-2 outline-none bg-transparent z-50 peer" placeholder="Search"/>
-                        <MagnifyingGlassIcon className="stroke-1 stroke-gray-300 mx-2 peer-focus-within:stroke-black peer-hover:stroke-black ease-linear duration-100" width={20}/>
+                        <MagnifyingGlassIcon className="stroke-1 stroke-gray-300 mx-2 peer-focus-within:stroke-black peer-hover:stroke-zinc-900" width={20}/>
                     </motion.div>
                     <span key="searchOverlay" onClick={() => searchBarHandler()} className={`w-full h-[calc(100%_-_68px)] absolute inset-x-0`}></span>
                 </>
@@ -131,10 +131,9 @@ export const Header = () => {
             
             <AnimatePresence>
                 {mobileMenu && (
-                    <motion.div initial={{opacity: 0, x:-100}} animate={{opacity: 1, x: 0}} exit={{ x: -100, opacity: 0 }} className="absolute w-full h-full bg-white top-0 left-0 m-0">
+                    <motion.div initial={{opacity: 0, x:-100}} animate={{opacity: 1, x: 0}} exit={{ x: -100, opacity: 0 }} className="absolute w-full h-screen bg-white top-0 left-0 m-0 z-50">
                         <div className="flex items-center justify-between p-4 border-b">
-                            <h2 className="font-bold">Menu</h2>
-                            <span onClick={() => mobileMenuHandler()}> <XMarkIcon width={20} /> </span>
+                            <span className="cursor-pointer" onClick={() => mobileMenuHandler()}> <XMarkIcon width={20} /> </span>
                         </div>
                         <div className="p-4 pt-0">
                             <ul className="children:children:py-4 children:children:flex children:children:items-center children:children:justify-between">

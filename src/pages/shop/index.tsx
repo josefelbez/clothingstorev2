@@ -1,7 +1,12 @@
+import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import Head from "next/head";
 
 const Home: NextPage = () => {
+
+  const { data } = api.products.getAll.useQuery();
+
+  if(!data) return <p>Loading ...</p>
 
   return (
     <>
@@ -12,7 +17,6 @@ const Home: NextPage = () => {
       </Head>
       
       <main>
-
         <h1>a</h1>
       </main>
     </>

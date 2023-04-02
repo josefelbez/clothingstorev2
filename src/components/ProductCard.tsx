@@ -32,7 +32,7 @@ export const ProductCard = ( {data, className, hasUtilities} : Props ) => {
                     <motion.div className='ease-linear duration-100 select-none bg-zinc-100 flex items-center justify-center w-auto rounded-t-md'>
                         <Link className="aspect-square relative" href={`/shop/${id}`}>
                             {discountPercentage !== 0 && <span className='border uppercase border-dashed absolute left-0 top-0  rounded-br-md rounded-tl-md px-1 font-light bg-green-500 text-white z-20'>{discountPercentage}% OFF</span>}
-                            <Image className="p-4 mix-blend-darken object-contain w-full max-w-[300px] aspect-square" src={image} alt={title} width={200} height={200} priority />
+                            <Image className="p-4 mix-blend-darken object-contain w-full max-w-[300px] aspect-square" placeholder='blur' blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII=' src={image} alt={title} width={200} height={200} priority />
                         </Link>
                     </motion.div>
                     <div className='p-2 text-sm lg:text:md flex flex-col'>

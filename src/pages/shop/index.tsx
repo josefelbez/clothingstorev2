@@ -1,6 +1,10 @@
+import { Slideshow } from "@/components/Slideshow";
 import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import Head from "next/head";
+import { Suspense } from "react";
+import ProductPage from "./[id]";
+import { ProductCard } from "@/components/ProductCard";
 
 const Home: NextPage = () => {
 
@@ -16,8 +20,19 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main>
-        <h1>a</h1>
+      <main className="grow">
+        <section className="p-4 space-y-5">
+            <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Shop</h2>
+            <Suspense fallback={<p>Loading...</p>}>
+              <div className="grid grid-cols-5 gap-2">
+                {data.map((product) => (
+                  <div key={product.id}>
+                    <ProductCard data={product} />
+                  </div>
+                ))}
+              </div>
+            </Suspense>
+          </section>
       </main>
     </>
   );

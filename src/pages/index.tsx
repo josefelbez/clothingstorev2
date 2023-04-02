@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main >
+      <main className="grow">
         <section className="p-4 space-y-5">
           <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Best Sellers</h2>
           <Suspense fallback={<p>Loading...</p>}>

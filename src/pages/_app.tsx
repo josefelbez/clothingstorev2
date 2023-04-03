@@ -19,6 +19,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           <div className='absolute top-0 left-0 right-0'> <Toaster>
             {(t) => (
               <ToastBar
+                
                 toast={t}
                 style={{
                   ...t.style,
@@ -26,7 +27,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
                 }}
               />
             )}
-          </Toaster>; </div>
+          </Toaster> </div>
           <Component {...pageProps} />
           <Footer />
         </div>

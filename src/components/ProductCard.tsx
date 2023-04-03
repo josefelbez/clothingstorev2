@@ -4,10 +4,7 @@ import type { RouterOutputs } from '@/utils/api';
 import Link from 'next/link';
 import { HeartIcon, ShoppingBagIcon, TrashIcon } from '@heroicons/react/24/outline';
 
-import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en.json'
-
-TimeAgo.addDefaultLocale(en)
+import toast, { Toaster } from 'react-hot-toast';
 
 import { useCart } from 'react-use-cart'
 import { useWishlist } from 'react-use-wishlist'
@@ -20,6 +17,8 @@ type Props = {
     className?: string,
     hasUtilities?: boolean,
 }
+
+const notify = () => toast('Here is your toast.');
 
 export const ProductCard = ( {data, className, hasUtilities} : Props ) => {
 
@@ -38,10 +37,12 @@ export const ProductCard = ( {data, className, hasUtilities} : Props ) => {
     }
 
     return (
+        <>
+        
         <motion.div className={`${hasUtilities ? 'children:space-y-2 md:grid md:grid-cols flex flex-col children:text-center children:md:justify-center children:md:items-center children:md:text-start justify-center items-center gap-10 first:children:col-span-12 first:md:children:col-span-8 children:col-span-12 children:md:col-span-4 last:children:col-span-12 children:items-center children:justify-center' : className} relative`} initial={{opacity: 0, x: -20}} animate={{opacity: 1, x: 0}}>
                     {!hasUtilities && (<motion.div className='absolute top-0 right-0 p-2 gap-2 flex flex-col z-20'>
-                        <motion.div whileTap={{scale: 0.8}} onClick={() => inWishlist(id.toString()) ? removeWishlistItem(id.toString()) : addWishlistItem(product)} className={`${inWishlist(id.toString()) ? 'p-2 shadow-md rounded-md border children:stroke-red-700 children:fill-red-700' : 'bg-white p-2 shadow-md rounded-md border  '} cursor-pointer duration-75 ease-linear text-zinc-300 hover:bg-zinc-100 children:hover:fill-red-800 children:hover:stroke-red-800`}> <HeartIcon width={20} /> </motion.div>
-                        <motion.div whileTap={{scale: 0.8}} onClick={() => inCart(id.toString()) ? removeItem(id.toString()) : addItem(product)} className={`${inCart(id.toString()) ? 'bg-zinc-900 text-white p-2 shadow-md rounded-md border border-zinc-900' : 'bg-white p-2 shadow-md rounded-md border'} cursor-pointer duration-75 ease-linear hover:text-zinc-600 text-zinc-300`}> {inCart(id.toString()) ? <TrashIcon width={20} /> : <ShoppingBagIcon width={20} /> } </motion.div>
+                        <motion.div whileTap={{scale: 0.8}} onClick={() => inWishlist(id.toString()) ? [removeWishlistItem(id.toString()), toast.error('Successfully removed from your Wishlist!')] : [addWishlistItem(product), toast.success('Successfully added Wishlist!') ]} className={`${inWishlist(id.toString()) ? 'p-2 shadow-md rounded-md border children:stroke-red-700 children:fill-red-700' : 'bg-white p-2 shadow-md rounded-md border  '} cursor-pointer duration-75 ease-linear text-zinc-300 hover:bg-zinc-100 children:hover:fill-red-800 children:hover:stroke-red-800`}> <HeartIcon width={20} /> </motion.div>
+                        <motion.div whileTap={{scale: 0.8}} onClick={() => inCart(id.toString()) ? [removeItem(id.toString()), toast.error('Successfully removed from your cart!')]: [addItem(product), toast.success('Successfully added to your Cart!')]} className={`${inCart(id.toString()) ? 'bg-zinc-900 text-white p-2 shadow-md rounded-md border border-zinc-900' : 'bg-white p-2 shadow-md rounded-md border'} cursor-pointer duration-75 ease-linear hover:text-zinc-600 text-zinc-300`}> {inCart(id.toString()) ? <TrashIcon width={20} /> : <ShoppingBagIcon width={20} /> } </motion.div>
                     </motion.div>)}
                     <motion.div className='ease-linear duration-100 select-none bg-zinc-100 flex items-center justify-center w-auto rounded-t-md'>
                         <Link className="aspect-square relative" href={`/shop/${id}`}>
@@ -62,10 +63,11 @@ export const ProductCard = ( {data, className, hasUtilities} : Props ) => {
                     </div>
                     {hasUtilities && (
                         <div className='col-span-12 flex gap-5 items-center space-y-0 justify-center'>
-                            <button onClick={ ()=> inWishlist(id.toString()) ? removeWishlistItem(id.toString()) : addWishlistItem(product) } className={`${inWishlist(id.toString()) ? 'bg-zinc-900 text-white' : 'bg-transparent text-zinc-900'} border rounded-md hover:border-zinc-900 duration-100 ease-linear p-2 text-xs child:stroke-1 flex items-center gap-2`}> <HeartIcon width={15   } /> {inWishlist(id.toString()) ? <span>Remove from Wishlist</span> : <span>Add to Wishlist</span>} </button>
-                            <button onClick={ ()=> inCart(id.toString()) ? removeItem(id.toString()) : addItem(product) } className={`${inCart(id.toString()) ? 'bg-zinc-900 text-white' : 'bg-transparent text-zinc-900'} border rounded-md hover:border-zinc-900 duration-100 ease-linear p-2 text-xs child:stroke-1 flex items-center gap-2`}> <ShoppingBagIcon width={15 } /> {inCart(id.toString()) ? <span>Remove from cart</span> : <span>Add to Cart</span>} </button>
+                            <button onClick={ ()=> inWishlist(id.toString()) ? [removeWishlistItem(id.toString()), toast.error('Successfully Removed from your Wishlist!')] : [addWishlistItem(product), toast.success('Successfully added to your Wishlist!')] } className={`${inWishlist(id.toString()) ? 'bg-zinc-900 text-white' : 'bg-transparent text-zinc-900'} border rounded-md hover:border-zinc-900 duration-100 ease-linear p-2 text-xs child:stroke-1 flex items-center gap-2`}> <HeartIcon width={15   } /> {inWishlist(id.toString()) ? <span>Remove from Wishlist</span> : <span>Add to Wishlist</span>} </button>
+                            <button onClick={ ()=> inCart(id.toString()) ? [removeItem(id.toString()), toast.error('Successfully Removed from your Cart!')] : [addItem(product), toast.success('Successfully added to your Car!')] } className={`${inCart(id.toString()) ? 'bg-zinc-900 text-white' : 'bg-transparent text-zinc-900'} border rounded-md hover:border-zinc-900 duration-100 ease-linear p-2 text-xs child:stroke-1 flex items-center gap-2`}> <ShoppingBagIcon width={15 } /> {inCart(id.toString()) ? <span>Remove from cart</span> : <span>Add to Cart</span>} </button>
                         </div>
                     )}
                 </motion.div>
+        </>
     )
 }

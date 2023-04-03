@@ -103,7 +103,7 @@ export const Header = () => {
                         <ul className="relative flex gap-10 children:hidden first:children:flex first:children:sm:hidden children:sm:flex font-light first:hover:children-li:border-black first:children-li:border-0 children-li:py-1 first:children-li:py-0 children-li:border-b children-li:border-b-transparent">
                             <li className="cursor-pointer" onClick={() => [mobileMenuHandler(), closeSearchBar()]}> <Bars3BottomLeftIcon width={20} className="stroke-1"/> </li>
                             <li onClick={() => closeSearchBar()} className={`${pathname === '/' ? 'font-normal' : 'font-light'}`}> <Link href="/"> Home </Link> </li>
-                            <li onMouseOver={openShopMenu} onMouseOut={closeShopMenu} className={pathname === '/shop' || pathname.match(`/shop/category/`) ? 'font-normal' : 'font-light'}> Shop </li>
+                            <li onMouseOver={openShopMenu} onMouseOut={closeShopMenu} className={pathname === '/shop' || pathname.match(`/shop/category/`) ? 'font-normal' : 'font-light'}> <Link href="/shop"> Shop </Link> </li>
                         
                             
                             {shopMenu && (

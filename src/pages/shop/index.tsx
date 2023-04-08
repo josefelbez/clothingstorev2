@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
   const { data } = api.products.getAll.useQuery();
 
-  if(!data) return <p>Loading ...</p>
+  if(!data) return <div className="p-4 flex w-full items-center justify-center h-[calc(100vh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
 
   return (
     <>

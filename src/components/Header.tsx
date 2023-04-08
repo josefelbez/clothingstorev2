@@ -130,8 +130,8 @@ export const Header = () => {
                     <div>
                         <ul className="flex gap-5 children:cursor-pointer">
                             <li onClick={() => searchBarHandler()}> <MagnifyingGlassIcon width={20} className="stroke-1"/> </li>
-                            <li onClick={() => closeSearchBar()}> <Link href="/" className="relative"> <HeartIcon width={20} className="stroke-1"/> {wishlistItems > 0 && <span className="absolute bottom-3 text-xs left-2 right-0 bg-black w-5 flex items-center justify-center aspect-square text-white rounded-full">{wishlistItems}</span>} </Link> </li>
-                            <li onClick={() => closeSearchBar()}> <Link href="/" className="relative"> <ShoppingBagIcon width={20} className="stroke-1"/> {cartItems > 0 && <span className="absolute bottom-3 text-xs left-2 right-0 bg-black w-5 flex items-center justify-center aspect-square text-white rounded-full">{cartItems}</span>} </Link> </li>
+                            <li onClick={() => closeSearchBar()}> <Link href="/wishlist" className="relative"> <HeartIcon width={20} className="stroke-1"/> {wishlistItems > 0 && <span className="absolute bottom-3 text-xs left-2 right-0 bg-black w-5 flex items-center justify-center aspect-square text-white rounded-full">{wishlistItems}</span>} </Link> </li>
+                            <li onClick={() => closeSearchBar()}> <Link href="/cart" className="relative"> <ShoppingBagIcon width={20} className="stroke-1"/> {cartItems > 0 && <span className="absolute bottom-3 text-xs left-2 right-0 bg-black w-5 flex items-center justify-center aspect-square text-white rounded-full">{cartItems}</span>} </Link> </li>
                         </ul>
                     </div>
                 </nav>

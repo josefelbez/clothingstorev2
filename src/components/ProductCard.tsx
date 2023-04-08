@@ -46,7 +46,7 @@ export const ProductCard = ( {data, className, hasUtilities} : Props ) => {
                     </motion.div>)}
                     <motion.div className='ease-linear duration-100 select-none bg-zinc-100 flex items-center justify-center w-auto rounded-t-md'>
                         <Link className="aspect-square relative" href={`/shop/${id}`}>
-                            {discountPercentage !== 0 && <span className='border uppercase border-dashed absolute left-0 top-0  rounded-br-md rounded-tl-md px-1 font-light bg-green-500 text-white z-20'>{discountPercentage}% OFF</span>}
+                            {discountPercentage !== 0 && <span className='uppercase absolute left-0 top-0  rounded-br-md rounded-tl-md px-1 font-light bg-zinc-950 text-white z-20'>{discountPercentage}% OFF</span>}
                             <Image className="p-4 mix-blend-darken object-contain w-full max-w-[300px] aspect-square" placeholder='blur' blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII=' src={image} alt={title} width={200} height={200} priority />
                         </Link>
                     </motion.div>
@@ -56,8 +56,8 @@ export const ProductCard = ( {data, className, hasUtilities} : Props ) => {
                         <h2>Size: {size && size.title}</h2>
                         {discountPercentage !== 0 ?
                         <div className='flex gap-2'>
-                            <h3 className='line-through text-zinc-400'>$ {price}</h3>
-                            <h3 className='text-green-500'>$ {discountedPrice}</h3>
+                            <h3 className='line-through text-zinc-300'>$ {price}</h3>
+                            <h3 className='text-zinc-950'>$ {discountedPrice}</h3>
                         </div>
                         : <h3>$ {price}</h3>}
                     </div>

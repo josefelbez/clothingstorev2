@@ -1,10 +1,13 @@
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { ProductCard } from "@/components/ProductCard";
 import { Slideshow } from "@/components/Slideshow";
 import SlideshowHero from "@/components/SlideshowHero";
 import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { Suspense } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 const Home: NextPage = () => {
 
@@ -52,10 +55,23 @@ const Home: NextPage = () => {
         </section>
 
         <section className="p-4 space-y-5">
-          <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Best Deals</h2>
+          
           <Suspense fallback={<div className="p-4 flex w-full items-center justify-center my-auto h-auto"> <LoadingSpinner size={64}/> </div>}>
             <Slideshow isBestDeals data={data}/>
           </Suspense>
+        </section>
+
+        <section className="p-4 space-y-5">
+          <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Categories</h2>
+          <div className="flex flex-col sm:flex-row gap-5">
+          {categories && categories.filter((category) => category._count.products > 0).map((category) => (
+            <Link key={category.id} href={`shop/category/${category.id}`} className="px-4 border rounded-sm hover:bg-zinc-900 hover:text-white duration-75 ease-linear">
+              <div className="flex gap-2 p-4">
+                <h2>{category.title}</h2> - <h2>({category._count.products} Product{category._count.products > 1 && 's'})</h2>
+              </div>
+            </Link>
+          ))}              
+          </div>
         </section>
 
       </main>

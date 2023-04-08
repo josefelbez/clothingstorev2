@@ -21,8 +21,8 @@ const SlideshowHero = ( {data, categories}: {data: Product[], categories: Catego
         <Swiper className='h-[calc(100svh_-_62.8px)]'>
             {categories.filter((category) => category._count.products > 0).map((item) => (
                 <SwiperSlide key={item.id} className='p-4'>
-                    <div className='relative border border-zinc-900 rounded-sm h-full p-4'>
-                        <h2 className='text-3xl bg-zinc-900 pb-2 w-fit uppercase text-white absolute top-2 left-2'> {item.title} </h2>
+                    <div className='relative border border-zinc-900 rounded-sm h-full p-2'>
+                        <h2 className='text-3xl bg-zinc-900 pb-2 w-fit uppercase text-white'> {item.title} </h2>
                         <div className='flex flex-col gap-2 justify-evenly items-center h-full '>
                             {data.filter((product) => product.category.id === item.id).slice(0,1).map((product) => (
                                 <>

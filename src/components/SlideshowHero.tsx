@@ -14,11 +14,11 @@ type Category = RouterOutputs["categories"]["getAll"][number];
 
 const SlideshowHero = ( {data, categories}: {data: Product[], categories: Category[]} ) => {
 
-    if(!data) return <div className="p-4 flex w-full items-center justify-center h-[calc(100vh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
-    if(!categories) return <div className="p-4 flex w-full items-center justify-center h-[calc(100vh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
+    if(!data) return <div className="p-4 flex w-full items-center justify-center h-[calc(100svh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
+    if(!categories) return <div className="p-4 flex w-full items-center justify-center h-[calc(100svh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
 
     return (
-        <Swiper className='h-[calc(100vh_-_62.8px)]'>
+        <Swiper className='h-[calc(100svh_-_62.8px)]'>
             {categories.filter((category) => category._count.products > 0).map((item) => (
                 <SwiperSlide key={item.id} className='p-4'>
                     <div className='relative border border-zinc-900 rounded-sm h-full p-4'>

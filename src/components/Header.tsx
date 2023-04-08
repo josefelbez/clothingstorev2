@@ -140,9 +140,9 @@ export const Header = () => {
             <AnimatePresence>
             {searchBar && (
                 <>
-                    <motion.div key="searchBox" initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -20}} className="bg-white hover:border-zinc-900 focus-within:border-zinc-900 absolute cursor-pointer  flex justify-between items-center w-fit border mx-auto inset-x-0 rounded-full my-5 z-20">
+                    <motion.div key="searchBox" initial={{opacity: 0, y:-100}} animate={{opacity: 1, y: 0}} exit={{opacity: 0, y: -20}} className="bg-white border-zinc-900 absolute cursor-pointer  flex justify-between items-center w-fit border mx-auto inset-x-0 rounded-full my-5 z-20">
                         <input type="text" className="py-2 pl-4 pr-2 outline-none bg-transparent z-50 peer" placeholder="Search"/>
-                        <MagnifyingGlassIcon className="stroke-1 stroke-gray-300 mx-2 peer-focus-within:stroke-black peer-hover:stroke-zinc-900" width={20}/>
+                        <MagnifyingGlassIcon className="stroke-1 mx-2  stroke-zinc-900" width={20}/>
                     </motion.div>
                     <span key="searchOverlay" onClick={() => searchBarHandler()} className={`w-full h-[calc(100%_-_68px)] absolute inset-x-0`}></span>
                 </>

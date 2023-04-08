@@ -22,23 +22,26 @@ const SlideshowHero = ( {data, categories}: {data: Product[], categories: Catego
             {categories.filter((category) => category._count.products > 0).map((item) => (
                 <SwiperSlide key={item.id} className='p-4'>
                     <div className='relative border border-zinc-900 rounded-sm h-full p-2'>
-                        <h2 className='text-3xl bg-zinc-900 pb-2 w-fit uppercase text-white'> {item.title} </h2>
+                        <Link href={`/shop/category/${item.id}`}> <h2 className='text-3xl bg-zinc-900 pb-2 w-fit uppercase text-white'> {item.title} </h2> </Link>
                         <div className='flex flex-col gap-2 justify-evenly items-center h-full '>
                             {data.filter((product) => product.category.id === item.id).slice(0,1).map((product) => (
                                 <>
                                 <div key={product.id} className='flex flex-col md:flex-row gap-5'>
                                     <div className='relative p-4'>
-                                        <span className='absolute right-0 top-0 bg-zinc-900 text-white uppercase text-lg font-extralight'>Best Seller</span>
-                                        <Image className='bg-white border rounded-md  p-4 mix-blend-multiply object-contain h-fit max-h-[250px] md:max-h-[350px] max-w-[250px] md:max-w-[350px] aspect-square' src={product.image} width={350} height={350} alt={product.title} priority />
+                                        <span className='absolute right-0 top-0 bg-zinc-900 z-20 text-white uppercase text-lg font-extralight'>Best Seller</span>
+                                        <Link href={`/shop/${product.id}`}>
+                                            <Image className='bg-white border hover:border-zinc-900 rounded-md  p-4 mix-blend-multiply object-contain h-fit max-h-[250px] md:max-h-[350px] max-w-[250px] md:max-w-[350px] w-full sm:w-full mx-auto aspect-square' src={product.image} width={350} height={350} alt={product.title} priority />
+                                        </Link>
                                     </div>
-                                    <div className='flex flex-col h-full items-start justify-center'>
+                                    <div className='flex flex-col h-full items-start justify-center  text-center sm:justify-start'>
                                         <h2 className='font-black text-md sm:text-2xl uppercase'>{product.title}</h2>
-                                        <hgroup className='flex justify-between w-full'>
+                                        <hgroup className='flex justify-center sm:justify-start w-full gap-2'>
                                             <div className='flex items-center justify-center gap-2'>
-                                                <h3 className='font-light text-zinc-600'>{item.title}</h3> 
+                                                <Link href={`/shop/category/${item.id}`}> <h3 className='font-light text-zinc-600'>{item.title}</h3> </Link>
                                                 -
                                                 <h3>{product.size.title}</h3>
                                             </div>
+                                            -
                                             <h3 className='font-bold text-zinc-600'>$ {product.discountPercentage !== 0 ? product.discountPercentage : product.price}</h3>
                                         </hgroup>
                                     </div>

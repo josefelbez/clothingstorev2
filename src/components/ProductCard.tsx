@@ -62,7 +62,7 @@ export const ProductCard = ( {data, className, hasUtilities} : Props ) => {
                         : <h3>$ {price}</h3>}
                     </div>
                     {hasUtilities && (
-                        <div className='col-span-12 flex gap-5 items-center space-y-0 justify-center'>
+                        <div className='col-span-12 flex flex-col sm:flex-row gap-5 items-center space-y-0 justify-center'>
                             <button onClick={ ()=> inWishlist(id.toString()) ? [removeWishlistItem(id.toString()), toast.error('Successfully Removed from your Wishlist!')] : [addWishlistItem(product), toast.success('Successfully added to your Wishlist!')] } className={`${inWishlist(id.toString()) ? 'bg-zinc-900 text-white' : 'bg-transparent text-zinc-900'} border rounded-md hover:border-zinc-900 duration-100 ease-linear p-2 text-xs child:stroke-1 flex items-center gap-2`}> <HeartIcon width={15   } /> {inWishlist(id.toString()) ? <span>Remove from Wishlist</span> : <span>Add to Wishlist</span>} </button>
                             <button onClick={ ()=> inCart(id.toString()) ? [removeItem(id.toString()), toast.error('Successfully Removed from your Cart!')] : [addItem(product), toast.success('Successfully added to your Car!')] } className={`${inCart(id.toString()) ? 'bg-zinc-900 text-white' : 'bg-transparent text-zinc-900'} border rounded-md hover:border-zinc-900 duration-100 ease-linear p-2 text-xs child:stroke-1 flex items-center gap-2`}> <ShoppingBagIcon width={15 } /> {inCart(id.toString()) ? <span>Remove from cart</span> : <span>Add to Cart</span>} </button>
                         </div>

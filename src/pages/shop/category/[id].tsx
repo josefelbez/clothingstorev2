@@ -39,8 +39,8 @@ const CategoryPage: NextPage< {id: string} > = ( {id} ) => {
             </Suspense>
           </section>
           <section className='w-full space-y-5 p-4'>
-            <h2 className='text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit'>Other categories</h2>
-            <h3>Check out other categories products!</h3>
+            <h2 className='text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit'>Categories</h2>
+            <h3>Check out our categories!</h3>
             <SlideshowCategories data={categories}/>
           </section>
       </main>

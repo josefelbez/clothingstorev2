@@ -1,17 +1,26 @@
-import { Slideshow } from "@/components/Slideshow";
 import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import Head from "next/head";
-import { Suspense } from "react";
-import ProductPage from "./[id]";
+import { Suspense, useEffect, useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
+import { SlideshowCategories } from "@/components/SlideshowCategories";
+import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const Home: NextPage = () => {
 
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  useEffect (() => (
+    setFilterOpen(false)
+  ), [])
+
   const { data } = api.products.getAll.useQuery();
+  const { data: categories } = api.categories.getAll.useQuery();
 
   if(!data) return <div className="p-4 flex w-full items-center justify-center h-[calc(100vh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
+  if(!categories) return <div className="p-4 flex w-full items-center justify-center h-[calc(100vh_-_80px)] my-auto"> <LoadingSpinner size={64}/> </div>
 
   return (
     <>
@@ -23,7 +32,14 @@ const Home: NextPage = () => {
       
       <main className="grow">
         <section className="p-4 space-y-5 h-auto">
-            <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Shop</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Shop</h2> <motion.button whileTap={{scale:0.9}} className={`flex justify-between items-center p-2 gap-5 duration-75 ease-linear hover:bg-zinc-900 hover:text-white ${filterOpen ? 'bg-zinc-900 text-white' : 'border border-zinc-900'}`} onClick={() => setFilterOpen(prev => !prev)}> <span>Filter</span> {filterOpen ? <motion.div animate={{rotate: 0}}> <ChevronDownIcon width={20} /> </motion.div> : <motion.div animate={{rotate: -90}}> <ChevronDownIcon width={20} /> </motion.div>} </motion.button>
+            </div>
+            <AnimatePresence>
+              {filterOpen && <motion.div initial={{opacity:0, x:-100}} animate={{opacity:1, x:0}} exit={{opacity:0, x:-20}}>
+                <SlideshowCategories data={categories} isFilter/>
+              </motion.div>}
+            </AnimatePresence>
             <Suspense fallback={<div className="p-4 flex w-full items-center justify-center my-auto h-auto"> <LoadingSpinner size={64}/> </div>}>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
                 {data.map((product) => (

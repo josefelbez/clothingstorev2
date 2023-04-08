@@ -25,6 +25,7 @@ const SlideshowHero = ( {data, categories}: {data: Product[], categories: Catego
                         <h2 className='text-3xl bg-zinc-900 pb-2 w-fit uppercase text-white absolute top-2 left-2'> {item.title} </h2>
                         <div className='flex flex-col gap-2 justify-evenly items-center h-full '>
                             {data.filter((product) => product.category.id === item.id).slice(0,1).map((product) => (
+                                <>
                                 <div key={product.id} className='flex flex-col md:flex-row gap-5'>
                                     <div className='relative p-4'>
                                         <span className='absolute right-0 top-0 bg-zinc-900 text-white uppercase text-lg font-extralight'>Best Seller</span>
@@ -42,8 +43,10 @@ const SlideshowHero = ( {data, categories}: {data: Product[], categories: Catego
                                         </hgroup>
                                     </div>
                                 </div>
+                                <Link href={`/shop/${product.id}`} className='border border-zinc-900 p-4 px-8 uppercase font-light rounded-full text-zinc-900 hover:bg-zinc-900 hover:text-white duration-75 ease-linear'>Check Product</Link>
+                                </>
                             ))}
-                            <Link href={`/shop/category/${item.id}`} className='border border-zinc-900 p-4 px-8 uppercase font-light rounded-full text-zinc-900 hover:bg-zinc-900 hover:text-white duration-75 ease-linear'>Check All</Link>
+                            
                         </div>
                     </div>
                 </SwiperSlide>

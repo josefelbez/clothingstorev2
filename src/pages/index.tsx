@@ -65,8 +65,8 @@ const Home: NextPage = () => {
           <h2 className="text-4xl uppercase font-bold pb-1 border-b-4 border-b-black w-fit">Categories</h2>
           <div className="flex flex-col sm:flex-row gap-5">
           {categories && categories.filter((category) => category._count.products > 0).sort((a,b) => a._count.products > b._count.products ? -1 : 1).map((category) => (
-            <Link key={category.id} href={`shop/category/${category.id}`} className="px-4 border rounded-sm hover:bg-zinc-900 hover:text-white duration-75 ease-linear">
-              <div className="flex gap-2 p-4">
+            <Link key={category.id} href={`shop/category/${category.id}`} className="p-2 border rounded-sm hover:bg-zinc-900 hover:text-white duration-75 ease-linear">
+              <div className="border border-white flex gap-2 p-2">
                 <h2>{category.title}</h2> - <h2>({category._count.products} Product{category._count.products > 1 && 's'})</h2>
               </div>
             </Link>
